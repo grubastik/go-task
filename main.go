@@ -4,26 +4,11 @@
 package main
 
 import (
-    "github.com/grubastik/restApi/handler"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
-	"github.com/labstack/echo/middleware"
+    "github.com/grubastik/restApi/server"
 )
 
 func main() {
-	e := echo.New()
-
-	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	// Routes
-	e.POST("/api", handler.Post)
-	e.GET("/api", handler.Get)
-	e.GET("/api/:id", handler.Get)
-	e.PUT("/api/:id", handler.Put)
-	e.DELETE("/api/:id", handler.Delete)
-
-	// Start server
-	e.Run(standard.New(":8080"))
+	var s *server.Server
+	s = server.New()
+	s.RunServer()
 }
